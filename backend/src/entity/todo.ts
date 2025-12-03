@@ -8,7 +8,7 @@ export class todos {
     readonly id!: string;
 
     // Define other columns here
-    @Column({ type: 'varchar', length: 255, nullable: false })
+    @Column({ type: 'varchar', length: 50, nullable: false })
     public title!: string;
 
     @Column({ type: 'text', nullable: false })
