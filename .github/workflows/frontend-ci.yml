@@ -36,7 +36,7 @@ jobs:
         run: npm ci # 依存関係をインストール
       
       - name: Run ESLint
-        run: npm run lint # ESLintを実行
+        run: npm run lint
       
       - name: Run tests
         run: npm run test -- --ci --coverage # CI環境にてテストを実行
