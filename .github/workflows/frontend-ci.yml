@@ -28,7 +28,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '24.11.0'
+          node-version: 22
           cache: 'npm' # npmキャッシュを有効化
           cache-dependency-path: frontend/package-lock.json
       
