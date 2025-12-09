@@ -23,7 +23,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-         persist-credentials: false
+          persist-credentials: false
 
       - name: Setup Node.js
         uses: npm/setup-node@v3
