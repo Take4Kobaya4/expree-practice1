@@ -28,7 +28,7 @@ jobs:
       - name: Setup Node.js
         uses: npm/setup-node@v3
         with:
-          version: 24.11.0
+          version: '24.11.0'
           cache: 'npm' # npmのキャッシュを使用
 
       - name: Install dependencies
