@@ -39,7 +39,7 @@ jobs:
         run: npm run lint
       
       - name: Run tests
-        run: npm run test -- --ci --coverage # CI環境にてテストを実行
+        run: npm run test # CI環境にてテストを実行
 
       - name: Build
         run: npm run build # ビルドを実行
