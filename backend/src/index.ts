@@ -1,30 +1,36 @@
-import { AppDataSource } from "./config/data-source"
-import { User } from "./entity/User"
+import { AppDataSource } from "./config/data-source";
 import express from 'express';
+import * as dotenv from 'dotenv';
+import todoRoutes from './routes/todoRoutes';
 
+dotenv.config();
 
 const app = express();
+const port = process.env.PORT || 3001;
 
+export const API_BASE_URL = '/api/todos';
 
-export const API_BASE_URL = '/api';
+app.use(express.json());
 
-app.use();
+// ルーティング: /api/todos で一覧を表示できるようにする
+app.use(API_BASE_URL, todoRoutes);
 
+// ヘルスチェック
+app.get('/health', (req, res) => {
+    res.status(200).send('OK');
+});
 
-AppDataSource.initialize().then(async () => {
-
-    console.log("Inserting a new user into the database...")
-    const user = new User()
-    user.firstName = "Timber"
-    user.lastName = "Saw"
-    user.age = 25
-    await AppDataSource.manager.save(user)
-    console.log("Saved a new user with id: " + user.id)
-
-    console.log("Loading users from the database...")
-    const users = await AppDataSource.manager.find(User)
-    console.log("Loaded users: ", users)
-
-    console.log("Here you can setup and run express / fastify / any other framework.")
-
-}).catch(error => console.log(error))
+const startServer = async () => {
+    try {
+        await AppDataSource.initialize();
+        console.log("Database connected");
+        app.listen(port, () => {
+            console.log(`Server is running on port ${port}`);
+        });
+    } catch (error) {
+        console.error("Error starting server:", error);
+        process.exit(1);
+    }
+}
+// サーバーを起動
+startServer();
