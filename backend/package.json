@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "dev": "DEBUG=express-crud-output-typeorm:* npx nodemon src/index.ts",
     "migration:run": "ts-node -P tsconfig.json ./node_modules/typeorm/cli.js migration:run -d ./src/config/data-source.ts",
     "migration:generate": "ts-node -P tsconfig.json ./node_modules/typeorm/cli.js migration:generate ./src/migration/migration -d ./src/config/data-source.ts",
@@ -29,7 +29,10 @@
     "typeorm": "^0.3.28"
   },
   "devDependencies": {
+    "@types/jest": "^30.0.0",
     "@types/node": "^25.0.1",
+    "jest": "^30.2.0",
+    "ts-jest": "^29.4.6",
     "ts-node-dev": "^2.0.0"
   }
 }

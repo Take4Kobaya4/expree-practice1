@@ -33,7 +33,7 @@ export class TodoController {
     getById = async(req: Request, res: Response): Promise<void> => {
         try {
             const { id } = req.params;
-            const todo = await this.todoService.getTodoById(id);
+            const todo = await this.todoService.getTodoById(Number(id));
             res.status(200).json(todo);
         } catch (error) {
             // Todoが見つからない場合は404、それ以外は500
@@ -71,7 +71,7 @@ export class TodoController {
     update = async(req: Request, res: Response): Promise<void> => {
         try {
             const { id } = req.params;
-            const todo = await this.todoService.updateTodo(id, req.body);
+            const todo = await this.todoService.updateTodo(Number(id), req.body);
             res.status(200).json(todo);
         } catch (error) {
             // Todoが見つからない場合は404、タイトルが必須ですの場合は400、それ以外は500
@@ -96,7 +96,7 @@ export class TodoController {
     delete = async(req: Request, res: Response): Promise<void> => {
         try {
             const { id } = req.params;
-            await this.todoService.deleteTodo(id);
+            await this.todoService.deleteTodo(Number(id));
             res.status(200).json({ message: 'Todoを削除しました' });
         } catch (error) {
             // Todoが見つからない場合は404、それ以外は500

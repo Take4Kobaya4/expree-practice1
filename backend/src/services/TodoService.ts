@@ -26,7 +26,7 @@ export class TodoService {
     }
 
     // 詳細表示
-    async getTodoById(id: string): Promise<Todo> {
+    async getTodoById(id: number): Promise<Todo> {
             const todo = await this.todoRepository.findById(id);
             // 存在しない場合はエラーを投げる
             if(!todo) {
@@ -43,7 +43,7 @@ export class TodoService {
             return await this.todoRepository.create(dto);
     }
 
-    async updateTodo(id: string, dto: UpdateTodoDTO): Promise<Todo> {
+    async updateTodo(id: number, dto: UpdateTodoDTO): Promise<Todo> {
             // タイトルがundefinedでない且つ空の場合、タイトルは必須ですとエラーを投げる
             if(dto.title !== undefined && dto.title.trim() === "") {
                 throw new Error("タイトルは必須です");
@@ -56,11 +56,7 @@ export class TodoService {
             return todo;
     }
 
-    async deleteTodo(id: string): Promise<void> {
-            const result = await this.todoRepository.delete(id);
-            // 削除できなかった場合はエラーを投げる
-            if ( result === undefined || result === null) {
-                throw new Error("Todo not found");
-            }
+    async deleteTodo(id: number): Promise<void> {
+            const deleted = await this.todoRepository.delete(id);
     }
 }

@@ -32,8 +32,8 @@ export class TodoRepository {
     }
 
     // 詳細表示
-    async findById(id: string): Promise<Todo | null> {
-        return await this.repository.findOneBy({ id });
+    async findById(id: number): Promise<Todo | null> {
+        return await this.repository.findOne({ where: { id: id.toString() } });
     }
 
     // 新規作成
@@ -43,7 +43,7 @@ export class TodoRepository {
     }
 
     // 更新
-    async update(id: string, todoData: Partial<Todo>): Promise<Todo> {
+    async update(id: number, todoData: Partial<Todo>): Promise<Todo> {
         const todo = await this.findById(id);
         if(!todo) {
             throw new Error(`Todo with id ${id} not found.`);
@@ -53,7 +53,11 @@ export class TodoRepository {
     }
 
     // 削除
-    async delete(id: string): Promise<void> {
-        const result = await this.repository.delete(id);
+    async delete(id: number): Promise<void> {
+        const todo = await this.findById(id);
+        if(!todo) {
+            throw new Error(`Todo with id ${id} not found.`);
+        }
+        await this.repository.delete(id);
     }
 }
